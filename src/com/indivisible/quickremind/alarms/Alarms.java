@@ -6,10 +6,12 @@ import java.util.List;
 import android.util.Log;
 
 /*
- * Class to contain a list of all Alarms
+ * Class to contain a collection of Alarms
  */
 public class Alarms {
 	
+	
+	//TODO implement sorts
 	
 	//// data
 	
@@ -20,13 +22,19 @@ public class Alarms {
 	
 	//// constructors
 	
+	/*
+	 * Create an empty Alarm collection
+	 */
 	public Alarms()
 	{
 		alarms = new ArrayList<Alarm>();
 		numActive = 0;
 	}
 	
-	
+	/**
+	 * Create a new collection of Alarms from an existing Collection
+	 * @param _alarms
+	 */
 	public Alarms(List<Alarm> _alarms)
 	{
 		alarms = _alarms;
@@ -73,11 +81,37 @@ public class Alarms {
 		catch (IndexOutOfBoundsException e)
 		{
 			Log.e("Alarms", "remove: IndexOutOfBoundsException");
-			Log.w("Alarms", "size: " +alarms.size()+ ", index: " +index);
+			Log.w("Alarms", "  size: " +alarms.size()+ ", index: " +index);
+			e.printStackTrace();
+		}
+		catch (UnsupportedOperationException e)
+		{
+			Log.w("Alarms", "remove: The inner Collection does not support removal of objects");
 			e.printStackTrace();
 		}
 		
 		return null;
+	}
+	
+	public Alarm remove(Alarm _alarm)
+	{
+		//TODO is returning null on unsuccessful remove the best way to go? better to use true/false?
+		
+		try
+		{
+			if (alarms.remove(_alarm))
+				return _alarm;
+			else
+				Log.w("Alarms", "remove: could not remove alarm - " +_alarm.getTitle());
+		}
+		catch (UnsupportedOperationException e)
+		{
+			Log.w("Alarms", "remove: The inner Collection does not support removal of objects");
+			e.printStackTrace();
+		}
+		
+		// return null on either exception or unsuccessful removal
+		return null;		
 	}
 	
 	
