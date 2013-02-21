@@ -66,7 +66,7 @@ public class MainActivity extends Activity implements OnClickListener
 	
 	@Override
 	public void onClick(View v) {
-		Log.v("Main", "Click: " +this.getApplicationContext().getString(v.getId()));	//FIXME prob not what I was looking for
+		//Log.v("Main", "Click: " +this.getApplicationContext().getString(v.getId()));	//FIXME prob not what I was looking for
 		
 		
 		switch (v.getId())
@@ -75,6 +75,7 @@ public class MainActivity extends Activity implements OnClickListener
 			if (secondsFromNow == 0)
 			{
 				Toast.makeText(this, "Sorry, I cannot travel back in time", Toast.LENGTH_SHORT).show();
+				Toast.makeText(this, "yet...", Toast.LENGTH_SHORT).show();
 			}
 			else
 			{
@@ -103,7 +104,7 @@ public class MainActivity extends Activity implements OnClickListener
 		}
 		else
 		{
-			tvSecondsFromNow.setText(secondsFromNow);
+			tvSecondsFromNow.setText(secondsFromNow+"");
 		}
 	}
 	
