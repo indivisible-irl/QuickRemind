@@ -1,7 +1,13 @@
 package com.indivisible.quickremind.alarms;
 
+/**
+ * Class to represent a single alarm
+ * @author DavidA
+ *
+ */
 public class Alarm {
 	
+	//TODO expand to house longer body text for more descriptive alarms
 	
 	//// data
 	
@@ -48,6 +54,13 @@ public class Alarm {
 		active = !active;
 		return active;
 	}
+	
+	
+	//TODO implement a comparator to allow sorting by times (and maybe others in the future - set/due, title, importance etc)
+//	public int compare(Alarm alarm)
+//	{
+//		
+//	}
 	
 	
 	
