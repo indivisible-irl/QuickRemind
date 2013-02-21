@@ -74,7 +74,7 @@ public class Alarms {
 	{
 		try
 		{
-			Alarm removed = alarms.remove(index);	//TODO need to return? waste of resources?
+			Alarm removed = alarms.remove(index);	//TODO need to return Alarm? waste of resources?
 			if (removed.isActive())
 				numActive--;
 		}
