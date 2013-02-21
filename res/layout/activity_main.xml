@@ -1,14 +1,62 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity" >
-
-    <TextView
-        android:layout_width="wrap_content"
+    android:orientation="vertical"
+    tools:context=".MainActivity"
+    >
+    
+    <!--  Instructions  -->
+    <TextView android:id="@+id/main_tvDescription"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="@string/hello_world" />
+        android:paddingTop="20dp"
+        android:gravity="center_horizontal"
+        android:text="Enter the number of seconds from now to trigger the alarm:"
+        />
+    
+    <!--  Display the current seconds from now to trigger alarm  -->
+    <TextView android:id="@+id/main_tvSecondsFromNow"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:gravity="center_horizontal"
+        android:textSize="60sp"
+        android:text="0"
+        />
+    
+    <!--  +/- Buttons  -->
+    <LinearLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="2"
+        >
+        <Button android:id="@+id/main_bSecondsMinusOne"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:text="-"
+            />
+        <Button android:id="@+id/main_bSecondsPlusOne"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:text="+"
+            />
+        
+    </LinearLayout>
+    
+    <!--  Button to activate alarm  -->
+    <Button android:id="@+id/main_bSetAlarm"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:text="Set Alarm"
+        />
 
-</RelativeLayout>
+</LinearLayout>
