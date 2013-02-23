@@ -1,7 +1,12 @@
 package com.indivisible.quickremind;
 
+import java.util.Calendar;
+
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -15,6 +20,7 @@ public class MainActivity extends Activity implements OnClickListener
 
 	//TODO EditTexts for title, description etc
 	//TODO don't allow negative values (ie alarms in the past)
+	//TODO option to choose RTC/RTC_WAKEUP for notifications (AlarmManager.set())
 	
 	
 	//// data
@@ -90,11 +96,27 @@ public class MainActivity extends Activity implements OnClickListener
 			break;
 		
 		case R.id.main_bSetAlarm:
-			unimplemented();
+			setAlarm();
 			break;
 		}
 	}
 	
+	
+	private void setAlarm()
+	{
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.SECOND, secondsFromNow);
+		
+		Intent alarmIntent = new Intent(this, AlarmReceiverActivity.class);
+		PendingIntent pendingIntent = PendingIntent.getActivity(this, 123, alarmIntent, PendingIntent.FLAG_CANCEL_CURRENT);
+		
+		AlarmManager am = (AlarmManager) getSystemService(Activity.ALARM_SERVICE);
+		am.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), pendingIntent);
+		
+		String msg = "Alarm will trigger in " +secondsFromNow+ " seconds";
+		Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+		finish();
+	}
 	
 	private void updateTimeDisplayed()
 	{
