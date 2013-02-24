@@ -24,6 +24,24 @@ public class Alarm {
 	
 	/**
 	 * Create a new Alarm object
+	 * @param _title
+	 * @param _description
+	 * @param _timeDue
+	 * @param _timeSet
+	 * @param _isActive
+	 */
+	public Alarm(String _title, String _description, long _timeDue, long _timeSet, boolean _isActive)
+	{
+		id = 0;
+		title = _title;
+		description = _description;
+		timeDue = _timeDue;
+		timeSet = _timeSet;
+		active = _isActive;
+	}
+	
+	/**
+	 * Create a new Alarm object (using existing id)
 	 * @param _id
 	 * @param _title
 	 * @param _description

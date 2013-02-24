@@ -4,12 +4,25 @@
     android:layout_height="match_parent"
     tools:context=".AlarmReceiverActivity" >
 
-    <TextView
+    <TextView android:id="@+id/receiver_tvNotify"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
+        android:paddingBottom="20dp"
         android:text="Alarm recieved" />
+    <TextView android:id="@+id/receiver_tvTitle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/receiver_tvNotify"
+        android:text="Alarm Title here"
+        />
+    <TextView android:id="@+id/receiver_tvDescription"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/receiver_tvTitle"
+        android:text="Alarm Description here"
+        />
     
     <!-- TODO snooze  -->
     <Button android:id="@+id/receiver_bStop"
