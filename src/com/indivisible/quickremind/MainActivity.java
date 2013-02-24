@@ -38,7 +38,7 @@ public class MainActivity extends Activity implements OnClickListener
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+		setContentView(R.layout.activity_alarm_set);
 		
 		initViews();
 		secondsFromNow = 0;
@@ -47,7 +47,7 @@ public class MainActivity extends Activity implements OnClickListener
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.activity_main, menu);
+		getMenuInflater().inflate(R.menu.activity_alarm_set, menu);
 		return true;
 	}
 	
