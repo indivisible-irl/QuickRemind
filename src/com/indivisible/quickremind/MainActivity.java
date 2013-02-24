@@ -3,6 +3,7 @@ package com.indivisible.quickremind;
 import java.util.Calendar;
 
 import com.indivisible.quickremind.alarms.Alarm;
+import com.indivisible.quickremind.database.DatabaseHandler;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -134,14 +135,14 @@ public class MainActivity extends Activity implements OnClickListener
 		
 		Alarm alarm = makeNewAlarm();
 		
+		DatabaseHandler dbh = new DatabaseHandler(this, "alarms", null, 0);
+		int alarmId = (int) dbh.saveNewAlarm(alarm);				//TODO catch long -> int ClassCastException
+		
 		Intent alarmIntent = new Intent(this, AlarmReceiverActivity.class);
+		alarmIntent.putExtra("requestCode", alarmId);
 		
-		//TODO replace extras with database save and use the id returned and pass to AlarmReceiverActivity
-		alarmIntent.putExtra(tagTitle, alarm.getTitle());
-		alarmIntent.putExtra(tagDescrip, alarm.getDescription());
-		
-		//TODO alarm id goes here (after database implementation
-		PendingIntent pendingIntent = PendingIntent.getActivity(this, 123, alarmIntent, PendingIntent.FLAG_CANCEL_CURRENT);
+		//TODO alarm id goes here? requestCode even accessible?
+		PendingIntent pendingIntent = PendingIntent.getActivity(this, alarmId, alarmIntent, PendingIntent.FLAG_CANCEL_CURRENT);
 		
 		AlarmManager am = (AlarmManager) getSystemService(Activity.ALARM_SERVICE);
 		am.set(AlarmManager.RTC_WAKEUP, alarm.getTimeDue(), pendingIntent);

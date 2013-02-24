@@ -1,5 +1,8 @@
 package com.indivisible.quickremind;
 
+import com.indivisible.quickremind.alarms.Alarm;
+import com.indivisible.quickremind.database.DatabaseHandler;
+
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
@@ -12,6 +15,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.TextView;
 
 /**
  * Activity triggered on Alarm activation
@@ -30,6 +34,8 @@ public class AlarmReceiverActivity extends Activity implements OnClickListener
 	private static final long[] vibratePattern = {800L, 400L, 400L, 800L}; 
 	
 	// views
+	private TextView tvNotify;
+	private TextView tvAlarmTitle, tvAlarmDescription;
 	private Button bStop;
 
 	
@@ -50,7 +56,20 @@ public class AlarmReceiverActivity extends Activity implements OnClickListener
 		vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
 		initViews();
 		
-		triggerAlarm();
+		
+		int alarmId = savedInstanceState.getInt("requestCode", -1);
+		Log.d("ReceiverActivity", "requestCode: " +alarmId);
+		
+		DatabaseHandler dbh = new DatabaseHandler(this, "alarms", null, 0);
+		Alarm alarm = dbh.getAlarm(alarmId);
+		
+		if (alarm.getId() != alarmId)
+		{
+			Log.w("ReceiverActivity", "alarmId does not match alarm.id - " +alarm.getId());
+			alarm.setId(alarmId);
+		}
+		
+		triggerAlarm(alarm);
 	}
 
 	@Override
@@ -93,6 +112,9 @@ public class AlarmReceiverActivity extends Activity implements OnClickListener
 	 */
 	private void initViews()
 	{
+		tvNotify = (TextView) findViewById(R.id.receiver_tvNotify);
+		tvAlarmTitle = (TextView) findViewById(R.id.receiver_tvTitle);
+		tvAlarmDescription = (TextView) findViewById(R.id.receiver_tvDescription);
 		bStop = (Button) findViewById(R.id.receiver_bStop);
 		
 		bStop.setOnClickListener(this);
@@ -124,9 +146,14 @@ public class AlarmReceiverActivity extends Activity implements OnClickListener
 	/**
 	 * Trigger the alarm actions. WakeLock, Vibrate, sounds etc
 	 */
-	private void triggerAlarm()
+	private void triggerAlarm(Alarm alarm)
 	{
 		wakeLockAcquire();
+		
+		tvNotify.setText("Alarm triggered: " +alarm.getId());
+		tvAlarmTitle.setText(alarm.getTitle());
+		tvAlarmDescription.setText(alarm.getDescription());
+		
 		vibrator.vibrate(vibratePattern, 0);
 	}
 	
