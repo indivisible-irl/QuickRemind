@@ -55,12 +55,15 @@ public class MainActivity extends Activity implements OnClickListener
 	
 	//// private methods
 	
+	/**
+	 * Initialise layout Views and OnClickListeners
+	 */
 	private void initViews()
 	{
-		tvSecondsFromNow = (TextView) findViewById(R.id.main_tvSecondsFromNow);
-		bSecondsMinusOne =(Button) findViewById(R.id.main_bSecondsMinusOne);
-		bSecondsPlusOne = (Button) findViewById(R.id.main_bSecondsPlusOne);
-		bSetAlarm = (Button) findViewById(R.id.main_bSetAlarm);
+		tvSecondsFromNow = (TextView) findViewById(R.id.alarmSet_tvSecondsFromNow);
+		bSecondsMinusOne =(Button) findViewById(R.id.alarmSet_bSecondsMinusOne);
+		bSecondsPlusOne = (Button) findViewById(R.id.alarmSet_bSecondsPlusOne);
+		bSetAlarm = (Button) findViewById(R.id.alarmSet_bSetAlarm);
 		
 		bSecondsMinusOne.setOnClickListener(this);
 		bSecondsPlusOne.setOnClickListener(this);
@@ -77,7 +80,7 @@ public class MainActivity extends Activity implements OnClickListener
 		
 		switch (v.getId())
 		{
-		case R.id.main_bSecondsMinusOne:
+		case R.id.alarmSet_bSecondsMinusOne:
 			if (secondsFromNow == 0)
 			{
 				Toast.makeText(this, "Sorry, I cannot travel back in time", Toast.LENGTH_SHORT).show();
@@ -90,18 +93,20 @@ public class MainActivity extends Activity implements OnClickListener
 			}
 			break;
 			
-		case R.id.main_bSecondsPlusOne:
+		case R.id.alarmSet_bSecondsPlusOne:
 			secondsFromNow++;
 			updateTimeDisplayed();
 			break;
 		
-		case R.id.main_bSetAlarm:
+		case R.id.alarmSet_bSetAlarm:
 			setAlarm();
 			break;
 		}
 	}
 	
-	
+	/**
+	 * Set a new alarm
+	 */
 	private void setAlarm()
 	{
 		Calendar cal = Calendar.getInstance();
@@ -118,6 +123,9 @@ public class MainActivity extends Activity implements OnClickListener
 		finish();
 	}
 	
+	/**
+	 * Update the layout with current values
+	 */
 	private void updateTimeDisplayed()
 	{
 		if (secondsFromNow < 0)
@@ -131,7 +139,9 @@ public class MainActivity extends Activity implements OnClickListener
 	}
 	
 	
-	
+	/**
+	 * Placeholder for future functionality
+	 */
 	private void unimplemented()
 	{
 		Toast.makeText(this, "Unimplemented action", Toast.LENGTH_SHORT).show();
