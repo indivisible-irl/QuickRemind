@@ -1,29 +1,41 @@
 package com.indivisible.quickremind.alarms;
 
 /**
- * Class to represent a single alarm
+ * Class to represent a single Alarm.
+ * Database interactions done through Alarms.class
  * @author DavidA
  *
  */
 public class Alarm {
 	
-	//TODO expand to house longer body text for more descriptive alarms
+	//TODO add static method to format DateTimes from long and vice-versa
 	
 	//// data
 	
 	private int id;
 	private String title;
-	private long timeDue;				//TODO store as DateTime or equivalent?
-	private long timeSet;				//    java.sql.Date
+	private String description;
+	private long timeDue;
+	private long timeSet;
 	private boolean active;
 	
 	
 	//// constructors
 	
-	public Alarm(int _id, String _title, long _timeDue, long _timeSet, boolean _isActive)
+	/**
+	 * Create a new Alarm object
+	 * @param _id
+	 * @param _title
+	 * @param _description
+	 * @param _timeDue
+	 * @param _timeSet
+	 * @param _isActive
+	 */
+	public Alarm(int _id, String _title, String _description, long _timeDue, long _timeSet, boolean _isActive)
 	{
 		id = _id;
 		title = _title;
+		description = _description;
 		timeDue = _timeDue;
 		timeSet = _timeSet;
 		active = _isActive;
@@ -32,25 +44,29 @@ public class Alarm {
 	
 	//// getters & setters
 	
-	public int getId()			{ return id;		}
-	public String getTitle()	{ return title;		}
-	public long getTimeDue()	{ return timeDue;	}
-	public long getTimeSet()	{ return timeSet;	}
-	public boolean isActive()	{ return active;	}
+	public int getId()				{ return id;		}
+	public String getTitle()		{ return title;		}
+	public String getDescription()	{ return description;	}
+	public long getTimeDue()		{ return timeDue;	}
+	public long getTimeSet()		{ return timeSet;	}
+	public boolean isActive()		{ return active;	}
 	
-	public void setId(int _id)				{ id = _id;			}
-	public void setTitle(String _title)		{ title = _title;	}
-	public void setTimeDue(long _time)		{ timeDue = _time;	}
-	public void setTimeSet(long _time)		{ timeSet = _time;	}		//TODO just get system time?
-	public void setActive(boolean _active)	{ active = _active;	}
+	public void setId(int _id)						{ id = _id;			}
+	public void setTitle(String _title)				{ title = _title;	}
+	public void setDescription(String _description)	{ description = _description;}
+	public void setTimeDue(long _time)				{ timeDue = _time;	}
+	public void setTimeSet(long _time)				{ timeSet = _time;	}
+	public void setActive(boolean _active)			{ active = _active;	}
 	
 	
 	//// public methods
 	
+	/**
+	 * Toggle the value for Alarm active. returns the new value.
+	 * @return
+	 */
 	public boolean toggleActive()
 	{
-		//TODO test this - true, false, null
-		//    null possible for 'boolean'? think only for 'Boolean'
 		active = !active;
 		return active;
 	}
